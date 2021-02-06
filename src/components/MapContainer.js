@@ -34,12 +34,16 @@ export class MapContainer extends Component {
     selectedPlace: {},
   };
  
-  onMarkerClick = (props, marker, e) =>
+  onMarkerClick = (props, marker, e) => {
+
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
     });
+    console.log(this.state.activeMarker)
+    console.log(this.state.selectedPlace)
+  }
 
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
@@ -50,14 +54,6 @@ export class MapContainer extends Component {
     }
   };
 
-  onMarkerClicked =(event) => {
-    var addedMarker = event.position;
-    this.setState( state => ({
-      places: [...state.places, addedMarker]
-    }))
-    console.log(this.state.activeMarker)
-    console.log(this.state.selectedPlace)
-  };
   render() {
     const { places } = this.state;
     return (
