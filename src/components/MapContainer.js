@@ -32,6 +32,7 @@ export class MapContainer extends Component {
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
+    addedMarkers: []
   };
  
   onMarkerClick = (props, marker, e) => {
@@ -40,7 +41,6 @@ export class MapContainer extends Component {
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
-      addedMarkers: []
     });
     console.log(this.state.activeMarker)
     console.log(this.state.selectedPlace)
