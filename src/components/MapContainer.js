@@ -53,17 +53,15 @@ export class MapContainer extends Component {
         activeMarker: null
       })
     }
-    if (this.state.addedMarkers.length < 2) {
-      this.setState({
-        addedMarkers: this.state.addedMarkers.push(clickEvent.latLng)
-      })  
-    }
+    this.setState({
+      addedMarkers: this.state.addedMarkers.push(clickEvent.latLng)
+    })  
+  }
 
     console.log(this.state.addedMarkers);
   };
 
   render() {
-    const { places } = this.state;
     return (
       <Map
         google={this.props.google}
