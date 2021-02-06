@@ -34,8 +34,9 @@ export class MapContainer extends Component {
       places: [],
     };
   }  
-  onMapClicked() {
-    console.log("Click")
+  onMapClicked(event) {
+    this.state.places.append(event.position)
+    console.log(this.state.places)
   };
   onMarkerClicked(event) {
     console.log(event)
