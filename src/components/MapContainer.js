@@ -42,7 +42,8 @@ export class MapContainer extends Component {
     });
 
   onMapClicked(event) {
-    console.log(this.state.places)
+    console.log(this.state.selectedPlace)
+    console.log(this.state.activeMarker)
   };
 
   onMarkerClicked =(event) => {
@@ -81,7 +82,7 @@ export class MapContainer extends Component {
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}>
             <div>
-              <h1>{this.state.selectedPlace.name}</h1>
+              <h1>{this.state.selectedPlace.position}</h1>
             </div>
         </InfoWindow>
       </Map>
