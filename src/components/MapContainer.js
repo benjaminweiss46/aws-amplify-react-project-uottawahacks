@@ -39,7 +39,8 @@ export class MapContainer extends Component {
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
-      showingInfoWindow: true
+      showingInfoWindow: true,
+      addedMarkers: []
     });
     console.log(this.state.activeMarker)
     console.log(this.state.selectedPlace)
@@ -52,7 +53,13 @@ export class MapContainer extends Component {
         activeMarker: null
       })
     }
-    console.log(mapProps, map, clickEvent);
+    if (this.state.addedMarkers.length < 2) {
+      this.setState({
+        addedMarkers: this.state.addedMarkers.push(clickEvent.latLng)
+      })  
+    }
+
+    console.log(this.state.addedMarkers);
   };
 
   render() {
