@@ -29,15 +29,17 @@ const heat = { positions: [{lat: 45.414358, lng: -75.715181, weight: 4}],
               };
 export class MapContainer extends Component {
   state = {
-    places: []
+    places: [{lat: 45.414358, lng: -75.715181}]
   }
   onMapClicked(event) {
     console.log(this.state.places)
   };
-  onMarkerClicked = (event) => {
-    this.setState(
-        prevState => ({ places: prevState.places.append(event)})
-      )
+
+  onMarkerClicked =(event) => {
+    var addedMarker = event.position;
+    this.setState( state => ({
+      places: [...state.places, addedMarker]
+    }))
   };
   render() {
     const { places } = this.state;
@@ -62,7 +64,7 @@ export class MapContainer extends Component {
               lat: area.Location[0],
               lng: area.Location[1]
             }}
-            onClick={this.onMarkerClicked}
+            onClick={(event) => this.onMarkerClicked(event)}
             />
           ))}
         <Polygon
