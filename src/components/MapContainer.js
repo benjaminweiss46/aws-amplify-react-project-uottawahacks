@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon} from 'google-maps-react';
 import * as covidData from "../covidData.json"
-import * as polys from "../polys.json"
+//import * as polys from "../polys.json"
 const mapStyles = {
   width: '100%',
   height: '100%'
 };
-const triangleCoords = [
+const ottawaCoords = [
       {lat: 45.376267, lng: -75.785266},
       {lat: 45.347802, lng: -75.818934},
       {lat: 45.314978, lng: -75.795572},
@@ -47,12 +47,12 @@ export class MapContainer extends Component {
             />
           ))}
         <Polygon
-          paths={polys.features.Orléans}
+          paths={ottawaCoords}
           strokeColor="#0000FF"
           strokeOpacity={0.8}
           strokeWeight={2}
           fillColor="#0000FF"
-          fillOpacity={0.35} />git 
+          fillOpacity={0.35}/>
       </Map>
     );
   }
