@@ -30,6 +30,7 @@ export class MapContainer extends Component {
         google={this.props.google}
         zoom={14}
         style={mapStyles}
+        heatmap={{heat}}
         initialCenter={
           {
             lat: 45.4215,
@@ -46,10 +47,6 @@ export class MapContainer extends Component {
             }}
             />
           ))}
-        <HeatMap 
-          positions={heat}
-          radius={50}
-          opacity={0.8}/>
         <Polygon
           paths={ottawaCoords}
           strokeColor="#0000FF"
