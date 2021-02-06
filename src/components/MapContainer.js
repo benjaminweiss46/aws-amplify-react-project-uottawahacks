@@ -86,6 +86,14 @@ export class MapContainer extends Component {
             onClick={this.onMarkerClick}
             />
           ))}
+        {this.state.addedMarkers.map((added) => (
+          <Marker
+            position={{
+              lat: added.lat,
+              lng: added.lng
+            }}
+          />
+        ))}
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}>
