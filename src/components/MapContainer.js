@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon} from 'google-maps-react';
+import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon, HeatMap} from 'google-maps-react';
 import * as covidData from "../covidData.json"
 //import * as polys from "../polys.json"
 const mapStyles = {
@@ -21,7 +21,7 @@ const ottawaCoords = [
       {lat: 45.402789, lng: -75.756407},
       {lat: 45.414358, lng: -75.715181}
     ];
-
+const heat = [{lat: 45.414358, lng: -75.715181, weight: 4}];
 export class MapContainer extends Component {
   render() {
 
@@ -46,6 +46,10 @@ export class MapContainer extends Component {
             }}
             />
           ))}
+        <HeatMap 
+          positions={heat}
+          radius={50}
+          opacity={0.8}/>
         <Polygon
           paths={ottawaCoords}
           strokeColor="#0000FF"
