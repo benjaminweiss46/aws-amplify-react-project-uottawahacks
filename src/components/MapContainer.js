@@ -74,6 +74,7 @@ export class MapContainer extends Component {
           <Marker 
             key={area.["Ward_Name"]} 
             title={area.["Ward_Name"]} 
+            name={area.["Number of Cases Reported in the Last 14 Days Linked to Outbreaks in  LTCH and RH"] + area.["Number of Cases Reported in the Last 14 Days,  Excluding LTCH and RH"]}
             position={{
               lat: area.Location[0],
               lng: area.Location[1]
@@ -85,7 +86,8 @@ export class MapContainer extends Component {
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}>
             <div>
-              <h1>{this.state.selectedPlace.name}</h1>
+              <h1>{this.state.selectedPlace.title}</h1>
+              <h3>Cases Past 14 Days: {this.state.selectedPlace.name}</h3>
             </div>
         </InfoWindow>
       </Map>
