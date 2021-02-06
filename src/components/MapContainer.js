@@ -52,6 +52,7 @@ export class MapContainer extends Component {
         activeMarker: null
       })
     }
+    console.log(props)
   };
 
   render() {
