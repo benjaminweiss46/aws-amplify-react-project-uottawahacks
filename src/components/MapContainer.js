@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon} from 'google-maps-react';
 import * as covidData from "../covidData.json"
+import * as polys from "../polys.json"
 const mapStyles = {
   width: '100%',
   height: '100%'
@@ -46,7 +47,7 @@ export class MapContainer extends Component {
             />
           ))}
         <Polygon
-          paths={triangleCoords}
+          paths={polys.features.Orléans}
           strokeColor="#0000FF"
           strokeOpacity={0.8}
           strokeWeight={2}
