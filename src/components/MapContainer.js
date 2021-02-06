@@ -5,10 +5,7 @@ const mapStyles = {
   width: '100%',
   height: '100%'
 };
-
-export class MapContainer extends Component {
-  render() {
-    const triangleCoords = [
+const triangleCoords = [
       {lat: 45.376267, lng: -75.785266},
       {lat: 45.347802, lng: -75.818934},
       {lat: 45.314978, lng: -75.795572},
@@ -23,6 +20,15 @@ export class MapContainer extends Component {
       {lat: 45.402789, lng: -75.756407},
       {lat: 45.414358, lng: -75.715181}
     ];
+const randomCoords = [
+      {lat: 45.376267, lng: -75.785266},
+      {lat: 45.347802, lng: -75.818934},
+      {lat: 45.314978, lng: -75.795572}
+    ];
+const Coords = [traingleCoords, randomCoords];
+
+export class MapContainer extends Component {
+  render() {
     return (
       <Map
         google={this.props.google}
@@ -35,14 +41,16 @@ export class MapContainer extends Component {
           }
         }
         onClick={this.onMapClicked}>
+        for (region of Coords) {
+          <Polygon
+            paths={region}
+            strokeColor="#0000FF"
+            strokeOpacity={0.8}
+            strokeWeight={2}
+            fillColor="#0000FF"
+            fillOpacity={0.35} />
+        }
 
-        <Polygon
-          paths={triangleCoords}
-          strokeColor="#0000FF"
-          strokeOpacity={0.8}
-          strokeWeight={2}
-          fillColor="#0000FF"
-          fillOpacity={0.35} />
       </Map>
     );
   }
