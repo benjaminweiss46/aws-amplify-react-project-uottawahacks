@@ -53,6 +53,8 @@ export class MapContainer extends Component {
   onMarkerClicked =(event) => {
     var addedMarker = event.position;
     this.setState( state => ({
+      console.log(this.state.activeMarker)
+      console.log(this.state.selectedPlace)
       places: [...state.places, addedMarker]
     }))
   };
