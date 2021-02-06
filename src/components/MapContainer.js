@@ -53,10 +53,9 @@ export class MapContainer extends Component {
         activeMarker: null
       })
     }
-    this.setState({
-      addedMarkers: this.state.addedMarkers.push(clickEvent.latLng)
-    })  
-
+    this.setState(prevState => ({
+      addedMarkers: [...prevState.addedMarkers,clickEvent.latLng]
+    }))
     console.log(this.state.addedMarkers);
   };
 
