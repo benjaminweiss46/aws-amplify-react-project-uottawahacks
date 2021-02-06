@@ -33,17 +33,12 @@ export class MapContainer extends Component {
     this.state = {
       places: [],
     };
-  }
-  onChildClickCallback = (key) => {
-    this.setState((state) => {
-      const index = state.places.findIndex((e) => e.id === key);
-      state.places[index].show = !state.places[index].show; // eslint-disable-line no-param-reassign
-      console.log(state.places);
-      return { places: state.places };
-    });
-  };
+  }  
   onMapClicked() {
     console.log("Click")
+  };
+  onMarkerClicked(event) {
+    console.log(event)
   };
   render() {
     const { places } = this.state;
@@ -60,8 +55,7 @@ export class MapContainer extends Component {
             lng: -75.6972
           }
         }
-        onClick={this.onMapClicked}
-        onChildClick={this.onChildClickCallback}>
+        onClick={this.onMapClicked}>
         {covidData.features.map((area) => (
           <Marker 
             key={area.["Ward_Name"]} 
@@ -69,6 +63,7 @@ export class MapContainer extends Component {
               lat: area.Location[0],
               lng: area.Location[1]
             }}
+            onClick={this.onMarkerClicked}
             />
           ))}
         <Polygon
