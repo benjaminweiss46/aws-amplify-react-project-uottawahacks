@@ -1,0 +1,13 @@
+{
+  "providers": [
+    "awscloudformation"
+  ],
+  "projectName": "aws-amplify-react-project-uottawahacks",
+  "version": "3.0",
+  "frontend": "android",
+  "android": {
+    "config": {
+      "ResDir": ""
+    }
+  }
+}
