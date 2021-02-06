@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon, HeatMap} from 'google-maps-react';
 import * as covidData from "../covidData.json"
 //import * as polys from "../polys.json"
@@ -28,21 +28,16 @@ const heat = { positions: [{lat: 45.414358, lng: -75.715181, weight: 4}],
                 }
               };
 export class MapContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      places: [],
-    };
-  }  
+  state = {
+    places: []
+  }
   onMapClicked(event) {
-    this.setState((state) => {
-      state.places.append(event.position);
-      console.log(this.state.places)
-      return {places: state.places };
-    })
+    console.log(this.state.places)
   };
-  onMarkerClicked(event) {
-    console.log(event)
+  onMarkerClicked = (event) => {
+    this.setState(
+        prevState => ({ places: prevState.places.append(event)})
+      )
   };
   render() {
     const { places } = this.state;
