@@ -73,6 +73,7 @@ export class MapContainer extends Component {
         {covidData.features.map((area) => (
           <Marker 
             key={area.["Ward_Name"]} 
+            title={area.["Ward_Name"]} 
             position={{
               lat: area.Location[0],
               lng: area.Location[1]
