@@ -88,10 +88,7 @@ export class MapContainer extends Component {
           ))}
         {this.state.addedMarkers.map((added) => (
           <Marker
-            position={{
-              lat: added.lat,
-              lng: added.lng
-            }}
+            position={added}
           />
         ))}
         <InfoWindow
