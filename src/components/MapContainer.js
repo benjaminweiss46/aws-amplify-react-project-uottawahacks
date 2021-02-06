@@ -29,8 +29,18 @@ const heat = { positions: [{lat: 45.414358, lng: -75.715181, weight: 4}],
               };
 export class MapContainer extends Component {
   state = {
-    places: [{lat: 45.414358, lng: -75.715181}]
-  }
+    showingInfoWindow: false,
+    activeMarker: {},
+    selectedPlace: {},
+  };
+ 
+  onMarkerClick = (props, marker, e) =>
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+
   onMapClicked(event) {
     console.log(this.state.places)
   };
@@ -64,16 +74,16 @@ export class MapContainer extends Component {
               lat: area.Location[0],
               lng: area.Location[1]
             }}
-            onClick={(event) => this.onMarkerClicked(event)}
+            onClick={this.onMarkerClick}
             />
           ))}
-        <Polygon
-          paths={ottawaCoords}
-          strokeColor="#0000FF"
-          strokeOpacity={0.8}
-          strokeWeight={2}
-          fillColor="#0000FF"
-          fillOpacity={0.35}/>
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}>
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+            </div>
+        </InfoWindow>
       </Map>
     );
   }
