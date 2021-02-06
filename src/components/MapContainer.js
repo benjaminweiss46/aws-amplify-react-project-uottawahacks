@@ -28,6 +28,12 @@ const heat = { positions: [{lat: 45.414358, lng: -75.715181, weight: 4}],
                 }
               };
 export class MapContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      places: [],
+    };
+  }
   onChildClickCallback = (key) => {
     this.setState((state) => {
       const index = state.places.findIndex((e) => e.id === key);
@@ -36,6 +42,7 @@ export class MapContainer extends Component {
     });
   };
   render() {
+    const { places } = this.state;
     return (
       <Map
         google={this.props.google}
@@ -49,7 +56,16 @@ export class MapContainer extends Component {
             lng: -75.6972
           }
         }
-        onClick={this.onMapClicked}>
+        onChildClick={this.onChildClickCallback}>
+        {places.map((place) => (
+              <Marker
+                key={place.id}
+                lat={place.geometry.location.lat}
+                lng={place.geometry.location.lng}
+                show={place.show}
+                place={place}
+              />
+          ))}
         {covidData.features.map((area) => (
           <Marker 
             key={area.["Ward_Name"]} 
