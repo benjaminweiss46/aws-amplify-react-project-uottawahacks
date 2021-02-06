@@ -40,8 +40,8 @@ export class MapContainer extends Component {
           <Marker 
             key={area.["Ward_Name"]} 
             position={{
-              lat: area.location[0],
-              lng: area.location[1]
+              lat: area.Location[0],
+              lng: area.Location[1]
             }}
             />
           ))}
