@@ -21,7 +21,12 @@ const ottawaCoords = [
       {lat: 45.402789, lng: -75.756407},
       {lat: 45.414358, lng: -75.715181}
     ];
-const heat = [{lat: 45.414358, lng: -75.715181, weight: 4}];
+const heat = { positions: [{lat: 45.414358, lng: -75.715181, weight: 4}],
+              options: {
+                radius: 20,
+                opacity: 0.6
+                }
+              };
 export class MapContainer extends Component {
   render() {
 
@@ -30,7 +35,8 @@ export class MapContainer extends Component {
         google={this.props.google}
         zoom={14}
         style={mapStyles}
-        heatmap={{heat}}
+        heatmaplibrary={true}
+        heatmap={heat}
         initialCenter={
           {
             lat: 45.4215,
