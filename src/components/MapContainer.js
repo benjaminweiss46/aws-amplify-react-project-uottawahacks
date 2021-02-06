@@ -9,7 +9,7 @@ const mapStyles = {
 export class MapContainer extends Component {
   render() {
     const triangleCoords = [
-      {lat: 45.376267, lng: 75.785266},
+      {lat: 45.376267, lng: -75.785266},
       {lat: 45.347802, lng: -75.818934},
       {lat: 45.314978, lng: -75.795572},
       {lat: 45.335737, lng: -75.705562},
