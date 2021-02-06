@@ -38,8 +38,12 @@ export class MapContainer extends Component {
     this.setState((state) => {
       const index = state.places.findIndex((e) => e.id === key);
       state.places[index].show = !state.places[index].show; // eslint-disable-line no-param-reassign
+      console.log(state.places);
       return { places: state.places };
     });
+  };
+  onMapClicked() {
+    console.log("Click")
   };
   render() {
     const { places } = this.state;
@@ -56,16 +60,8 @@ export class MapContainer extends Component {
             lng: -75.6972
           }
         }
+        onClick={this.onMapClicked}
         onChildClick={this.onChildClickCallback}>
-        {places.map((place) => (
-              <Marker
-                key={place.id}
-                lat={place.geometry.location.lat}
-                lng={place.geometry.location.lng}
-                show={place.show}
-                place={place}
-              />
-          ))}
         {covidData.features.map((area) => (
           <Marker 
             key={area.["Ward_Name"]} 
@@ -84,9 +80,6 @@ export class MapContainer extends Component {
           fillOpacity={0.35}/>
       </Map>
     );
-  }
-  onMapClicked() {
-    console.log("Click")
   }
 }
 
