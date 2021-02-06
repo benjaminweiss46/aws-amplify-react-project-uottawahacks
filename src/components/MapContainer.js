@@ -28,8 +28,14 @@ const heat = { positions: [{lat: 45.414358, lng: -75.715181, weight: 4}],
                 }
               };
 export class MapContainer extends Component {
+  onChildClickCallback = (key) => {
+    this.setState((state) => {
+      const index = state.places.findIndex((e) => e.id === key);
+      state.places[index].show = !state.places[index].show; // eslint-disable-line no-param-reassign
+      return { places: state.places };
+    });
+  };
   render() {
-
     return (
       <Map
         google={this.props.google}

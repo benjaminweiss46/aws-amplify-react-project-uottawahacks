@@ -1,0 +1,167 @@
+[33mcommit 08116dd3e3abb28397be42a865c8e37a09ac1748[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 12:32:32 2021 -0500
+
+    clickable icons
+
+[33mcommit b46eb4a2f458a9fdab99e7412bb4a66f3b9dd888[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 05:11:45 2021 -0500
+
+    heat try 3
+
+[33mcommit dcf580ffeaa19f5d0b5c082c498c566074bed117[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 05:05:01 2021 -0500
+
+    heat try 2
+
+[33mcommit c6a5c7c9adb8826693ae0b5c2bb3b83b968b87a0[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 04:58:52 2021 -0500
+
+    adding heat elements
+
+[33mcommit 5beaf9248876e1d8be1801d21eeea43fc5e97b6f[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 04:45:16 2021 -0500
+
+    added all administrative districts center points
+
+[33mcommit e41b364eeedc2092278027db4821de9531795e9f[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 04:12:32 2021 -0500
+
+    geoJson tweaking
+
+[33mcommit c44f6dc504b7d20bb8e74f89b6749b0809f19259[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 04:05:45 2021 -0500
+
+    added 1 region in ottowa
+
+[33mcommit eed66aa3860c0ad0ffedc19c28366fedb5d003f7[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 03:38:03 2021 -0500
+
+    see multiple points
+
+[33mcommit 55390409000e525e2ab89dd68f3e5e30eaf16fd6[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 03:34:49 2021 -0500
+
+    capital letter, javascript is type sensitive could have caused problem
+
+[33mcommit fef6687fb7704e61ec5ab9d39667f5bed2f2f615[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 03:29:34 2021 -0500
+
+    adding markers for all the data
+
+[33mcommit 03556f3cae2520dd783a4cd691fa4c85d3e79ac8[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 02:34:43 2021 -0500
+
+    loop over regions
+
+[33mcommit b3c21dbe323f64c99c795dbb81acb56fa277df99[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 02:27:18 2021 -0500
+
+    a negative made polygon weird
+
+[33mcommit 42eab370627282157276e5406f8c375aa1157941[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 02:16:36 2021 -0500
+
+    adding ottowa cover to map
+
+[33mcommit 0597fa3eca087fc00feb4b74f1a8b38241c113a5[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 02:05:13 2021 -0500
+
+    Add shape on map
+
+[33mcommit 169d2edb19294dbb25b81baaa4eeb99a9e4633be[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 01:55:55 2021 -0500
+
+    recognize clicks
+
+[33mcommit 9cd69c2a27e52c4cb8e7774df007120c6cd6d001[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 01:38:46 2021 -0500
+
+    trying out heatmap
+
+[33mcommit d85ff58216937bdf6da866e64abfc92ebc4ed7e0[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 00:54:10 2021 -0500
+
+    incorrect imports
+
+[33mcommit 460d89637085a122083864cc7e12cdd666198d3c[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 00:51:07 2021 -0500
+
+    fixed my editor
+
+[33mcommit bb152840b1f7d28739afc4fa9a17aecdab616b9b[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 00:40:37 2021 -0500
+
+    try one more time
+
+[33mcommit f34524fd63edf5026adfe6a393187cd251e5ea8c[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 00:35:21 2021 -0500
+
+    seperating church and state
+
+[33mcommit c0c128dc8ab1307ec3603562be421b5fc71a93c6[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Sat Feb 6 00:04:08 2021 -0500
+
+    trying to add search box
+
+[33mcommit 9ee3bda9624c67af1d3e4c96e050f624886019c8[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Fri Feb 5 22:37:22 2021 -0500
+
+    forgot a neg so ended up in ciberia
+
+[33mcommit c67f14bad1e22d6cd897bd8bcbd81c329689b5ec[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Fri Feb 5 22:33:30 2021 -0500
+
+    just set center on ottowa
+
+[33mcommit 645ef9e1db3c894979d58cacf43cc7f56671359f[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Fri Feb 5 22:03:41 2021 -0500
+
+    maps try 3
+
+[33mcommit 559f94ca6c4d72f334a4801c2aa49c2aebb09054[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Fri Feb 5 21:59:42 2021 -0500
+
+    Adding map try 2
+
+[33mcommit 50818a0d1650f559b63639672b2e827aee23fa95[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Fri Feb 5 21:41:22 2021 -0500
+
+    Adding a google map
+
+[33mcommit 167446367ae82e3b4df03b59e40e741efd167bcb[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Fri Feb 5 20:25:37 2021 -0500
+
+    Version 2
+
+[33mcommit 58d8e29a50b14341167cac86f8d970b0a70352b0[m
+Author: Benjamin Weiss <benjamin.weiss46@gmail.com>
+Date:   Fri Feb 5 20:14:14 2021 -0500
+
+    Initialize project using Create React App
