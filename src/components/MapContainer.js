@@ -45,14 +45,14 @@ export class MapContainer extends Component {
     console.log(this.state.selectedPlace)
   }
 
-  onMapClicked = (props,e) => {
+  onMapClicked = (props, coord) => {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
         activeMarker: null
       })
     }
-    console.log(e.latLng)
+    console.log(coord)
   };
 
   render() {
