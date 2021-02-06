@@ -19,11 +19,16 @@ export class MapContainer extends Component {
             lng: -75.6972
           }
         }
+        onClick={this.onMapClicked} 
       />
     );
+  }
+  onMapClicked() {
+    console.log("Click")
   }
 }
 
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyBraKNh5eY4BQxe-xcfc4DhC5ZX_coTegs'
 })(MapContainer);
+
