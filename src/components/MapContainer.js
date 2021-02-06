@@ -35,8 +35,11 @@ export class MapContainer extends Component {
     };
   }  
   onMapClicked(event) {
-    this.state.places.append(event.position)
-    console.log(this.state.places)
+    this.setState((state) => {
+      state.places.append(event.position);
+      console.log(this.state.places)
+      return {places: state.places };
+    })
   };
   onMarkerClicked(event) {
     console.log(event)
