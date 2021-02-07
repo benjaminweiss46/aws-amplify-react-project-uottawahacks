@@ -42,11 +42,9 @@ export class MapContainer extends Component {
     Geocode.fromLatLng(added.lat(), added.lng()).then(
     response => {
       const address = response.results[0].formatted_address;
-      console.log(address);
       return address
       },
       error => {
-      console.error(error);
       return ""
       }
     )
@@ -105,6 +103,7 @@ export class MapContainer extends Component {
           <Marker
             position={added}
             title={this.getAddress(added)}
+            name={this.getAddress(added)}
             onClick={this.onMarkerClick}
           />
         ))}
