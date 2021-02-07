@@ -16,6 +16,12 @@ const heat = { positions: [{lat: 45.414358, lng: -75.715181, weight: 4}],
                 opacity: 0.6
                 }
               };
+const config = {
+    headers: {
+     "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+    }
+  };
 export class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
@@ -29,7 +35,7 @@ export class MapContainer extends Component {
     selectedPlaceUser: {}
   };
   componentDidMount() {
-    axios.get('https://safetrekbackend.herokuapp.com/')
+    axios.get('https://safetrekbackend.herokuapp.com/', config)
       .then(res => {
         console.log(res)
       });
