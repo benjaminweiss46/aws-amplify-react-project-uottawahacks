@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon, HeatMap} from 'google-maps-react';
+import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon, Polyline, HeatMap} from 'google-maps-react';
 import * as covidData from "../covidData.json"
 import Geocode from "react-geocode";
 
@@ -9,21 +9,6 @@ const mapStyles = {
 };
 Geocode.setApiKey("AIzaSyBraKNh5eY4BQxe-xcfc4DhC5ZX_coTegs");
 Geocode.enableDebug();
-const ottawaCoords = [
-      {lat: 45.376267, lng: -75.785266},
-      {lat: 45.347802, lng: -75.818934},
-      {lat: 45.314978, lng: -75.795572},
-      {lat: 45.335737, lng: -75.705562},
-      {lat: 45.382055, lng: -75.583944},
-      {lat: 45.419178, lng: -75.522105},
-      {lat: 45.455796, lng: -75.442401},
-      {lat: 45.502016, lng: -75.474008},
-      {lat: 45.462057, lng: -75.594251},
-      {lat: 45.454351, lng: -75.689071},
-      {lat: 45.414358, lng: -75.715181},
-      {lat: 45.402789, lng: -75.756407},
-      {lat: 45.414358, lng: -75.715181}
-    ];
 const heat = { positions: [{lat: 45.414358, lng: -75.715181, weight: 4}],
               options: {
                 radius: 20,
@@ -35,10 +20,20 @@ export class MapContainer extends Component {
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
-    addedMarkers: []
+    generatedMarkers: [],
+    addedMarkers: [],
+    addedMarker: false,
+    showingInfoWindowUser: false,
+    activeMarkerUser: {},
+    selectedPlaceUser: {}
   };
- 
-  /**getAddress(added) {
+  async componentDidMount() {
+    const url = "https://api.randomuser.me/";
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data.results[0]);
+  }
+  getAddress(added) {
     return Geocode.fromLatLng(added.lat(), added.lng()).then(
     response => {
       return response.results[0].formatted_address;
@@ -47,7 +42,16 @@ export class MapContainer extends Component {
         return ""
       }
     )
-  }**/
+  }
+  /*addMarkertoRegistry() {
+    for (area in covidData.features) {
+
+    }
+    this.setState(prevState => ({
+        generatedMarkers: [...prevState.generatedMarkers,area],
+    }))
+    console.log(this.state.generatedMarkers)
+  }*/
 
   onMarkerClick = (props, marker, e) => {
 
@@ -60,6 +64,13 @@ export class MapContainer extends Component {
     console.log(this.state.selectedPlace)
   }
 
+  onUserMarkerClick = (props, marker, e) => {
+    this.setState({
+      selectedPlaceUser: props,
+      activeMarkerUser: marker,
+      showingInfoWindowUser: true,
+    });
+  }
   onMapClicked = (mapProps, map, clickEvent) => {
     if (this.state.showingInfoWindow) {
       this.setState({
@@ -67,13 +78,32 @@ export class MapContainer extends Component {
         activeMarker: null
       })
     }
-    if (this.addedMarkers.length < 1) {
+    else if (this.state.addedMarker == false) {
+      this.setState(prevState => ({
+        addedMarkers: [...prevState.addedMarkers,clickEvent.latLng],
+        addedMarker: true
+      }))
+    } 
+    else {
+      this.setState(prevState => ({
+        addedMarkers: [clickEvent.latLng],
+        addedMarker: true
+      }))
+    }
+
+    /**else if (this.state.addedMarkers < 2) {
+      console.log("show risk along path")
       this.setState(prevState => ({
         addedMarkers: [...prevState.addedMarkers,clickEvent.latLng]
       }))
-    } 
+    }**/
+    console.log(this.state.addedMarkers)
   };
   render() {
+      const triangleCoords = [
+    {lat: 25.774, lng: -80.190},
+    {lat: 18.466, lng: -66.118},
+    ];
     return (
       <Map
         google={this.props.google}
@@ -81,6 +111,7 @@ export class MapContainer extends Component {
         style={mapStyles}
         heatmaplibrary={true}
         heatmap={heat}
+        //onLoad={this.addMarkertoRegistry()}
         initialCenter={
           {
             lat: 45.4215,
@@ -103,9 +134,14 @@ export class MapContainer extends Component {
         {this.state.addedMarkers.map((added) => (
           <Marker
             position={added}
+            onClick={this.onUserMarkerClick}
           />
         ))}
-
+         <Polyline
+            path={triangleCoords}
+            strokeColor="#0000FF"
+            strokeOpacity={0.8}
+            strokeWeight={2} />
 
         <InfoWindow
           marker={this.state.activeMarker}
@@ -113,6 +149,13 @@ export class MapContainer extends Component {
             <div>
               <h1>{this.state.selectedPlace.title}</h1>
               <h3>Cases Past 14 Days: {this.state.selectedPlace.name}</h3>
+            </div>
+        </InfoWindow>
+        <InfoWindow
+          marker={this.state.activeMarkerUser}
+          visible={this.state.showingInfoWindowUser}>
+            <div>
+              <h3>Risk Score: </h3>
             </div>
         </InfoWindow>
       </Map>
