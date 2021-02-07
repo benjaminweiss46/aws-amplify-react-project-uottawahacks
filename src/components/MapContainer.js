@@ -88,7 +88,7 @@ export class MapContainer extends Component {
             />
           ))}
         {this.state.addedMarkers.map((added) => (
-          Geocode.fromLatLng(added).then(
+          Geocode.fromLatLng(added.lat, added.lng).then(
             response => {
               const address = response.results[0].formatted_address;
               console.log(address);
@@ -101,6 +101,8 @@ export class MapContainer extends Component {
             position={added}
           />
         ))}
+
+
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}>
