@@ -31,12 +31,12 @@ export class MapContainer extends Component {
     risk: 0
   };
   getRisk(lat, lang) {
-    console.log(this.risk)
     try {
       axios.get('https://safetrekbackend.herokuapp.com/?lat=45&long=-75', config)
         .then(res => {
           return 1
         });
+      return "Missed get request"
     }
     catch(err) {
       console.log(err)
@@ -83,8 +83,11 @@ export class MapContainer extends Component {
   }
 
   onMapClicked = (mapProps, map, clickEvent) => {
+    const r = this.getRisk(clickEvent.latLng)
+    console.log(r)
+    console.log(this.risk)
     this.setState({
-      risk: this.getRisk(clickEvent.latLng)
+      risk: r
     })
     if (this.state.showingInfoWindow) {
       this.setState({
