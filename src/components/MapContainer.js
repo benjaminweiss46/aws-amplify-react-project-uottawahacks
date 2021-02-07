@@ -60,7 +60,6 @@ export class MapContainer extends Component {
       addedMarkers: [...prevState.addedMarkers,clickEvent.latLng]
     }))
   };
-
   render() {
     return (
       <Map
@@ -93,17 +92,21 @@ export class MapContainer extends Component {
             response => {
               const address = response.results[0].formatted_address;
               console.log(address);
+              <Marker
+                position={added}
+                title={address}
+                onClick={this.onMarkerClick}
+              />
             },
             error => {
-              console.log(added.lat(),added.lng());
+              <Marker
+                position={added}
+                onClick={this.onMarkerClick}
+              />
               console.error(error);
             }
-          ),
-          <Marker
-            position={added}
-            title={address}
-            onClick={this.onMarkerClick}
-          />
+          )
+
         ))}
 
 
