@@ -59,7 +59,6 @@ export class MapContainer extends Component {
     this.setState(prevState => ({
       addedMarkers: [...prevState.addedMarkers,clickEvent.latLng]
     }))
-    console.log(this.state.addedMarkers);
   };
 
   render() {
@@ -90,13 +89,14 @@ export class MapContainer extends Component {
             />
           ))}
         {this.state.addedMarkers.map((added) => (
-          Geocode.fromLatLng(added).then(
+          Geocode.fromLatLng(added.lat.toString(), added.lng.toString()).then(
             response => {
               const address = response.results[0].formatted_address;
               console.log(address);
             },
             error => {
-              console.error(error, added);
+              console.log(added.lat.toString(),added.lng.toString());
+              console.error(error);
             }
           ),
           <Marker
