@@ -169,12 +169,7 @@ export class MapContainer extends Component {
             'rgba(127, 0, 63, 1)',
             'rgba(191, 0, 31, 1)',
             'rgba(255, 0, 0, 1)'
-          ];
-        
-    const positions = [
-            { lat: 45.4810323, lng: -75.5100002},
-            { lat: 45.44634845, lng: -75.54297672831477, }
-        ];    
+          ];   
     return (
       <Map
         google={this.props.google}
@@ -212,11 +207,6 @@ export class MapContainer extends Component {
             icon={walking}
           />
         ))}
-         <Polyline
-            path={triangleCoords}
-            strokeColor="#0000FF"
-            strokeOpacity={0.8}
-            strokeWeight={2} />
         <HeatMap
               gradient={gradient}
               opacity={0.5}
