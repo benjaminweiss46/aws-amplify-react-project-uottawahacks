@@ -1,8 +1,10 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, Image } from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon, Polyline, HeatMap} from 'google-maps-react';
 import * as covidData from "../covidData.json"
 import Geocode from "react-geocode";
 import axios from 'axios';
+import virus from '../icons-virus2.png'
+import walking from '../walking.png'
 
 const mapStyles = {
   width: '100%',
@@ -25,7 +27,7 @@ export class MapContainer extends Component {
     generatedMarkers: [],
     addedMarkers: [],
     addedMarker: false,
-    showingInfoWindowUser: false,
+    showingInfoWindowUser: true,
     activeMarkerUser: {},
     selectedPlaceUser: {},
     risk: 0
@@ -34,7 +36,7 @@ export class MapContainer extends Component {
     try {
       axios.get('https://safetrekbackend.herokuapp.com/?lat='+latlng.lat().toString()+'&long='+latlng.lng().toString(), config)
         .then(res => {
-          const r = res.data.weighted_avg_risk
+          const r = res.data.weighted_avg_exposure.toFixed(2);
           console.log(res)
           this.setState({
             risk: r
@@ -126,7 +128,32 @@ export class MapContainer extends Component {
     {lat: 25.774, lng: -80.190},
     {lat: 18.466, lng: -66.118},
     ];
-    const heatData = covidData.features.map(this.getHeatList)
+    const heatData = [
+            {lat: 45.4810323,lng: -75.5100002, weight: 0.2422680412},
+            {lat: 45.44634845,lng: -75.54297672831477, weight: 0.3762886616},
+            {lat: 45.280172,lng: -75.759707, weight: 0.438144332},
+            {lat: 45.3270693,lng: -75.92013157507392, weight:0.219072166},
+            {lat: 45.344318900000005,lng: -76.10733091174072, weight: 0.1752577328},
+            {lat: 45.2932625,lng: -75.92694788300115, weight: 0.244845362},
+            {lat: 45.357387,lng: -75.862424, weight: 0.180412372},
+            {lat: 45.32664695,lng: -75.83855656986515, weight: 0.2912371148},
+            {lat: 45.3251627,lng: -75.7523965140062, weight: 0.3943298988},
+            {lat: 45.3546314,lng: -75.60176637929231, weight: 1},
+            {lat: 45.44364865,lng: -75.60116829403388, weight: 0.5309278376},
+            {lat: 45.43114865,lng: -75.67649238436982, weight: 0.6675257764},
+            {lat: 45.4428243,lng: -75.63287646926986, weight: 0.5515463944},
+            {lat: 45.4125643,lng: -75.70463854107373, weight: 0.2680412384},
+            {lat: 45.39381415,lng: -75.74446300572795, weight: 0.154639176},
+            {lat: 45.3588909,lng: -75.68394616447799, weight: 0.4536082496},
+            {lat: 45.394166049999995,lng: -75.69061638728044, weight: 0.2345360836},
+            {lat: 45.396044200000006,lng: -75.63600683134734, weight: 0.7706185604},
+            {lat: 45.4248393,lng: -75.38310362294976, weight: 0.3041237128},
+            {lat: 45.222132,lng: -75.52350475889676, weight: 0.244845362},
+            {lat: 45.1269855,lng: -75.81363367556683, weight: 0.4278350536},
+            {lat: 45.28990735,lng: -75.68291785710551, weight: 0.3144329912},
+            {lat: 45.29484665,lng: -75.87825927288544, weight: 0.1417525778}
+          ]
+
     const gradient = [
             'rgba(0, 255, 255, 0)',
             'rgba(0, 255, 255, 1)',
@@ -164,7 +191,7 @@ export class MapContainer extends Component {
         onClick={this.onMapClicked}>
 
         {covidData.features.map((area) => (
-          <Marker 
+          <Marker
             key={area.["Ward_Name"]} 
             title={area.["Ward_Name"]} 
             name={area.["Number of Cases Reported in the Last 14 Days Linked to Outbreaks in  LTCH and RH"] + area.["Number of Cases Reported in the Last 14 Days,  Excluding LTCH and RH"]}
@@ -172,8 +199,9 @@ export class MapContainer extends Component {
               lat: area.Location[0],
               lng: area.Location[1]
             }}
+            icon={virus}
             onClick={this.onMarkerClick}
-            />
+           />
             //heatData.push({lat: area.Location[0], lng: area.Location[1], weight:area.["Number of Cases Reported in the Last 14 Days Linked to Outbreaks in  LTCH and RH"] + area.["Number of Cases Reported in the Last 14 Days,  Excluding LTCH and RH"]})
         ))}
 
@@ -181,6 +209,7 @@ export class MapContainer extends Component {
           <Marker
             position={added}
             onClick={this.onUserMarkerClick}
+            icon={walking}
           />
         ))}
          <Polyline
@@ -188,6 +217,12 @@ export class MapContainer extends Component {
             strokeColor="#0000FF"
             strokeOpacity={0.8}
             strokeWeight={2} />
+        <HeatMap
+              gradient={gradient}
+              opacity={0.5}
+              positions={heatData}
+              radius={200}
+        />
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}>
@@ -200,7 +235,7 @@ export class MapContainer extends Component {
           marker={this.state.activeMarkerUser}
           visible={this.state.showingInfoWindowUser}>
             <div>
-              <h3>Risk Score: {this.state.risk}</h3>
+              <h3>Exposure: {this.state.risk}</h3>
             </div>
         </InfoWindow>
       </Map>
