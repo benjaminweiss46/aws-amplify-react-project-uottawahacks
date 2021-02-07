@@ -10,12 +10,7 @@ const mapStyles = {
 };
 Geocode.setApiKey("AIzaSyBraKNh5eY4BQxe-xcfc4DhC5ZX_coTegs");
 Geocode.enableDebug();
-const heat = { positions: [{lat: 45.414358, lng: -75.715181, weight: 10}],
-              options: {
-                radius: 10,
-                opacity: 3
-                }
-              };
+
 const config = {
     headers: {
      "Access-Control-Allow-Origin": "*",
@@ -34,12 +29,12 @@ export class MapContainer extends Component {
     activeMarkerUser: {},
     selectedPlaceUser: {}
   };
-  componentDidMount() {
+  /*componentDidMount() {
     axios.get('https://safetrekbackend.herokuapp.com/risk/eval/?lat=45&long=-75', config)
       .then(res => {
         console.log(res)
       });
-  }
+  }*/
   /*getAddress(added) {
     return Geocode.fromLatLng(added.lat(), added.lng()).then(
     response => {
@@ -59,7 +54,12 @@ export class MapContainer extends Component {
     }))
     console.log(this.state.generatedMarkers)
   }*/
-
+  getPosHeat(area) {
+      return [
+            { lat: 45.4810323, lng: -75.5100002},
+            { lat: 45.44634845, lng: -75.54297672831477, }
+        ];
+    }
   onMarkerClick = (props, marker, e) => {
 
     this.setState({
@@ -78,6 +78,7 @@ export class MapContainer extends Component {
       showingInfoWindowUser: true,
     });
   }
+
   onMapClicked = (mapProps, map, clickEvent) => {
     if (this.state.showingInfoWindow) {
       this.setState({
@@ -111,13 +112,33 @@ export class MapContainer extends Component {
     {lat: 25.774, lng: -80.190},
     {lat: 18.466, lng: -66.118},
     ];
+    const gradient = [
+            'rgba(0, 255, 255, 0)',
+            'rgba(0, 255, 255, 1)',
+            'rgba(0, 191, 255, 1)',
+            'rgba(0, 127, 255, 1)',
+            'rgba(0, 63, 255, 1)',
+            'rgba(0, 0, 255, 1)',
+            'rgba(0, 0, 223, 1)',
+            'rgba(0, 0, 191, 1)',
+            'rgba(0, 0, 159, 1)',
+            'rgba(0, 0, 127, 1)',
+            'rgba(63, 0, 91, 1)',
+            'rgba(127, 0, 63, 1)',
+            'rgba(191, 0, 31, 1)',
+            'rgba(255, 0, 0, 1)'
+          ];
+        
+    const positions = [
+            { lat: 45.4810323, lng: -75.5100002},
+            { lat: 45.44634845, lng: -75.54297672831477, }
+        ];    
     return (
       <Map
         google={this.props.google}
         zoom={14}
         style={mapStyles}
         heatmaplibrary={true}
-        heatmap={heat}
         //onLoad={this.addMarkertoRegistry()}
         initialCenter={
           {
@@ -137,7 +158,8 @@ export class MapContainer extends Component {
             }}
             onClick={this.onMarkerClick}
             />
-          ))}
+        ))}
+
         {this.state.addedMarkers.map((added) => (
           <Marker
             position={added}
@@ -149,7 +171,6 @@ export class MapContainer extends Component {
             strokeColor="#0000FF"
             strokeOpacity={0.8}
             strokeWeight={2} />
-
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}>
@@ -165,6 +186,18 @@ export class MapContainer extends Component {
               <h3>Risk Score: </h3>
             </div>
         </InfoWindow>
+        {covidData.features.map((area) => (
+        <HeatMap
+          gradient={gradient}
+          opacity={0.6}
+          tracksViewChanges={false}
+          positions={[{
+              lat: area.Location[0],
+              lng: area.Location[1]
+            }]}
+          radius={10}
+        />
+        ),this)}
       </Map>
     );
   }
