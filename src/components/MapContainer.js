@@ -35,7 +35,7 @@ export class MapContainer extends Component {
     selectedPlaceUser: {}
   };
   componentDidMount() {
-    axios.get('https://safetrekbackend.herokuapp.com/risk/eval/', config)
+    axios.get('https://safetrekbackend.herokuapp.com/risk/eval/?lat=45&long=-75', config)
       .then(res => {
         console.log(res)
       });
