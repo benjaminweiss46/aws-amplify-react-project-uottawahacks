@@ -95,7 +95,7 @@ export class MapContainer extends Component {
               console.log(address);
             },
             error => {
-              console.log(added.get('lat'),added.get('lng'));
+              console.log(added.lat(),added.lng());
               console.error(error);
             }
           ),
