@@ -89,13 +89,13 @@ export class MapContainer extends Component {
             />
           ))}
         {this.state.addedMarkers.map((added) => (
-          Geocode.fromLatLng(added.lat.toString(), added.lng.toString()).then(
+          Geocode.fromLatLng(added.lat, added.lng).then(
             response => {
               const address = response.results[0].formatted_address;
               console.log(address);
             },
             error => {
-              console.log(added.lat.toString(),added.lng.toString());
+              console.log(added.lat,added.lng);
               console.error(error);
             }
           ),
