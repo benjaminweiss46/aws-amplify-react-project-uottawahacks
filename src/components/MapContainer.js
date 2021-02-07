@@ -38,17 +38,16 @@ export class MapContainer extends Component {
     addedMarkers: []
   };
  
-  getAddress(added) {
-    Geocode.fromLatLng(added.lat(), added.lng()).then(
+  /**getAddress(added) {
+    return Geocode.fromLatLng(added.lat(), added.lng()).then(
     response => {
-      const address = response.results[0].formatted_address;
-      return address
+      return response.results[0].formatted_address;
       },
       error => {
-      return ""
+        return ""
       }
     )
-  }
+  }**/
 
   onMarkerClick = (props, marker, e) => {
 
@@ -68,9 +67,11 @@ export class MapContainer extends Component {
         activeMarker: null
       })
     }
-    this.setState(prevState => ({
-      addedMarkers: [...prevState.addedMarkers,clickEvent.latLng]
-    }))
+    if (this.addedMarkers.length < 1) {
+      this.setState(prevState => ({
+        addedMarkers: [...prevState.addedMarkers,clickEvent.latLng]
+      }))
+    } 
   };
   render() {
     return (
@@ -102,9 +103,6 @@ export class MapContainer extends Component {
         {this.state.addedMarkers.map((added) => (
           <Marker
             position={added}
-            title={this.getAddress(added)}
-            name={this.getAddress(added)}
-            onClick={this.onMarkerClick}
           />
         ))}
 
