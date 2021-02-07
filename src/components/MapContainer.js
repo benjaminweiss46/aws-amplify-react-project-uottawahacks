@@ -1,7 +1,8 @@
 import React, { Component, useState } from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon, HeatMap} from 'google-maps-react';
 import * as covidData from "../covidData.json"
-//import * as polys from "../polys.json"
+import Geocode from "react-geocode";
+
 const mapStyles = {
   width: '100%',
   height: '100%'
@@ -87,6 +88,15 @@ export class MapContainer extends Component {
             />
           ))}
         {this.state.addedMarkers.map((added) => (
+          Geocode.fromLatLng(added).then(
+            response => {
+              const address = response.results[0].formatted_address;
+              console.log(address);
+            },
+            error => {
+              console.error(error);
+            }
+          ),
           <Marker
             position={added}
           />
