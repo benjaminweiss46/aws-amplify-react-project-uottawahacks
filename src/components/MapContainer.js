@@ -10,10 +10,10 @@ const mapStyles = {
 };
 Geocode.setApiKey("AIzaSyBraKNh5eY4BQxe-xcfc4DhC5ZX_coTegs");
 Geocode.enableDebug();
-const heat = { positions: [{lat: 45.414358, lng: -75.715181, weight: 4}],
+const heat = { positions: [{lat: 45.414358, lng: -75.715181, weight: 10}],
               options: {
-                radius: 20,
-                opacity: 0.6
+                radius: 10,
+                opacity: 3
                 }
               };
 const config = {
@@ -35,12 +35,12 @@ export class MapContainer extends Component {
     selectedPlaceUser: {}
   };
   componentDidMount() {
-    axios.get('https://safetrekbackend.herokuapp.com/', config)
+    axios.get('https://safetrekbackend.herokuapp.com/risk/eval/', config)
       .then(res => {
         console.log(res)
       });
   }
-  getAddress(added) {
+  /*getAddress(added) {
     return Geocode.fromLatLng(added.lat(), added.lng()).then(
     response => {
       return response.results[0].formatted_address;
@@ -50,7 +50,7 @@ export class MapContainer extends Component {
       }
     )
   }
-  /*addMarkertoRegistry() {
+  addMarkertoRegistry() {
     for (area in covidData.features) {
 
     }
@@ -171,6 +171,7 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyBraKNh5eY4BQxe-xcfc4DhC5ZX_coTegs'
+  apiKey: 'AIzaSyBraKNh5eY4BQxe-xcfc4DhC5ZX_coTegs',
+  libraries: ["visualization"]
 })(MapContainer);
 
