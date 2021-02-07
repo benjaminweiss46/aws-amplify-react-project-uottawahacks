@@ -30,17 +30,19 @@ export class MapContainer extends Component {
     selectedPlaceUser: {},
     risk: 0
   };
-  getRisk(lat, lang) {
+  getRisk(latlng) {
     try {
-      axios.get('https://safetrekbackend.herokuapp.com/?lat=45&long=-75', config)
+      axios.get('https://safetrekbackend.herokuapp.com/?lat='+latlng.lat().toString()+'&long='+latlng.lng().toString(), config)
         .then(res => {
-          return 1
+          const r = res.data.weighted_avg_risk
+          console.log(res)
+          this.setState({
+            risk: r
+          })
         });
-      return "Missed get request"
     }
     catch(err) {
       console.log(err)
-      return "Error"
     }
 
   }
@@ -84,8 +86,6 @@ export class MapContainer extends Component {
 
   onMapClicked = (mapProps, map, clickEvent) => {
     const r = this.getRisk(clickEvent.latLng)
-    console.log(r)
-    console.log(this.risk)
     this.setState({
       risk: r
     })
@@ -114,7 +114,6 @@ export class MapContainer extends Component {
         addedMarkers: [...prevState.addedMarkers,clickEvent.latLng]
       }))
     }**/
-    console.log(this.state.addedMarkers)
   };
  
   getHeatList(item) {
