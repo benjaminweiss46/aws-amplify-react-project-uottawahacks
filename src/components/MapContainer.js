@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon, Polyline, HeatMap} from 'google-maps-react';
 import * as covidData from "../covidData.json"
 import Geocode from "react-geocode";
+import axios from 'axios';
 
 const mapStyles = {
   width: '100%',
@@ -27,11 +28,11 @@ export class MapContainer extends Component {
     activeMarkerUser: {},
     selectedPlaceUser: {}
   };
-  async componentDidMount() {
-    const url = "https://api.randomuser.me/";
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data.results[0]);
+  componentDidMount() {
+    axios.get('https://safetrekbackend.herokuapp.com/')
+      .then(res => {
+        console.log(res)
+      });
   }
   getAddress(added) {
     return Geocode.fromLatLng(added.lat(), added.lng()).then(
