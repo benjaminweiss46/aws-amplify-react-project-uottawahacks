@@ -29,12 +29,12 @@ export class MapContainer extends Component {
     activeMarkerUser: {},
     selectedPlaceUser: {}
   };
-  /*componentDidMount() {
-    axios.get('https://safetrekbackend.herokuapp.com/risk/eval/?lat=45&long=-75', config)
+  componentDidMount() {
+    axios.get('https://safetrekbackend.herokuapp.com/?lat=45&long=-75', config)
       .then(res => {
         console.log(res)
       });
-  }*/
+  }
   /*getAddress(added) {
     return Geocode.fromLatLng(added.lat(), added.lng()).then(
     response => {
@@ -54,12 +54,6 @@ export class MapContainer extends Component {
     }))
     console.log(this.state.generatedMarkers)
   }*/
-  getPosHeat(area) {
-      return [
-            { lat: 45.4810323, lng: -75.5100002},
-            { lat: 45.44634845, lng: -75.54297672831477, }
-        ];
-    }
   onMarkerClick = (props, marker, e) => {
 
     this.setState({
@@ -107,11 +101,18 @@ export class MapContainer extends Component {
     }**/
     console.log(this.state.addedMarkers)
   };
+ 
+  getHeatList(item) {
+    var format = {lat: item.Location[0], lng: item.Location[1], weight: 2}
+  }
+  
+
   render() {
       const triangleCoords = [
     {lat: 25.774, lng: -80.190},
     {lat: 18.466, lng: -66.118},
     ];
+    const heatData = covidData.features.map(this.getHeatList)
     const gradient = [
             'rgba(0, 255, 255, 0)',
             'rgba(0, 255, 255, 1)',
@@ -147,6 +148,7 @@ export class MapContainer extends Component {
           }
         }
         onClick={this.onMapClicked}>
+
         {covidData.features.map((area) => (
           <Marker 
             key={area.["Ward_Name"]} 
@@ -158,6 +160,7 @@ export class MapContainer extends Component {
             }}
             onClick={this.onMarkerClick}
             />
+            //heatData.push({lat: area.Location[0], lng: area.Location[1], weight:area.["Number of Cases Reported in the Last 14 Days Linked to Outbreaks in  LTCH and RH"] + area.["Number of Cases Reported in the Last 14 Days,  Excluding LTCH and RH"]})
         ))}
 
         {this.state.addedMarkers.map((added) => (
@@ -186,18 +189,6 @@ export class MapContainer extends Component {
               <h3>Risk Score: </h3>
             </div>
         </InfoWindow>
-        {covidData.features.map((area) => (
-        <HeatMap
-          gradient={gradient}
-          opacity={0.6}
-          tracksViewChanges={false}
-          positions={[{
-              lat: area.Location[0],
-              lng: area.Location[1]
-            }]}
-          radius={10}
-        />
-        ),this)}
       </Map>
     );
   }
