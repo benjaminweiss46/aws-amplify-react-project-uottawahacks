@@ -101,6 +101,8 @@ export class MapContainer extends Component {
           ),
           <Marker
             position={added}
+            title={address}
+            onClick={this.onMarkerClick}
           />
         ))}
 
