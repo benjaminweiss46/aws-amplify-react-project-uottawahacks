@@ -27,13 +27,22 @@ export class MapContainer extends Component {
     addedMarker: false,
     showingInfoWindowUser: false,
     activeMarkerUser: {},
-    selectedPlaceUser: {}
+    selectedPlaceUser: {},
+    risk: 0
   };
-  componentDidMount() {
-    axios.get('https://safetrekbackend.herokuapp.com/?lat=45&long=-75', config)
-      .then(res => {
-        console.log(res)
-      });
+  getRisk(lat, lang) {
+    console.log(this.risk)
+    try {
+      axios.get('https://safetrekbackend.herokuapp.com/?lat=45&long=-75', config)
+        .then(res => {
+          return 1
+        });
+    }
+    catch(err) {
+      console.log(err)
+      return "Error"
+    }
+
   }
   /*getAddress(added) {
     return Geocode.fromLatLng(added.lat(), added.lng()).then(
@@ -61,8 +70,8 @@ export class MapContainer extends Component {
       activeMarker: marker,
       showingInfoWindow: true,
     });
-    console.log(this.state.activeMarker)
-    console.log(this.state.selectedPlace)
+    //console.log(this.state.activeMarker)
+    //console.log(this.state.selectedPlace)
   }
 
   onUserMarkerClick = (props, marker, e) => {
@@ -74,6 +83,9 @@ export class MapContainer extends Component {
   }
 
   onMapClicked = (mapProps, map, clickEvent) => {
+    this.setState({
+      risk: this.getRisk(clickEvent.latLng)
+    })
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
@@ -186,7 +198,7 @@ export class MapContainer extends Component {
           marker={this.state.activeMarkerUser}
           visible={this.state.showingInfoWindowUser}>
             <div>
-              <h3>Risk Score: </h3>
+              <h3>Risk Score: {this.state.risk}</h3>
             </div>
         </InfoWindow>
       </Map>
