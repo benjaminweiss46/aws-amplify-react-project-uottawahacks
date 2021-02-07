@@ -88,7 +88,7 @@ export class MapContainer extends Component {
             />
           ))}
         {this.state.addedMarkers.map((added) => (
-          Geocode.fromLatLng(added.lat, added.lng).then(
+          Geocode.fromLatLng(added.lat.toString(), added.lng.toString()).then(
             response => {
               const address = response.results[0].formatted_address;
               console.log(address);
