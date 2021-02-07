@@ -7,6 +7,8 @@ const mapStyles = {
   width: '100%',
   height: '100%'
 };
+Geocode.setApiKey("AIzaSyBraKNh5eY4BQxe-xcfc4DhC5ZX_coTegs");
+Geocode.enableDebug();
 const ottawaCoords = [
       {lat: 45.376267, lng: -75.785266},
       {lat: 45.347802, lng: -75.818934},
